@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f3f7; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.box {
+    width: 380px; 
+    height: auto; 
+    background: #1e222b; 
+    border-radius: 24px; 
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 70px); 
+    grid-template-rows: 90px repeat(4, 70px);
+    padding: 30px;
+    gap: 14px;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3), 
+                inset 0px 1px 2px rgba(255, 255, 255, 0.2); 
+}
+
+.sbox {
+    background-color: #2a2f3b; 
+    color: #ffffff;
+    border: none; 
+    border-radius: 16px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0px 4px 0px #15181f; 
+}
+
+
+.sbox:hover {
+    background-color: #353b4a;
+}
+
+.sbox:active {
+    transform: translateY(3px); 
+    box-shadow: 0px 1px 0px #15181f;
+}
+
+
+.sbox.operator {
+    background-color: #ff9f0a; 
+    box-shadow: 0px 4px 0px #cc7f08;
+}
+.sbox.operator:hover {
+    background-color: #ffb13b;
+}
+.sbox.operator:active {
+    box-shadow: 0px 1px 0px #cc7f08;
+}
+
+
+.sbox.function {
+    background-color: #a5a5a5;
+    color: #000000;
+    box-shadow: 0px 4px 0px #7a7a7a;
+}
+.sbox.function:hover {
+    background-color: #c4c4c4;
+}
+.sbox.function:active {
+    box-shadow: 0px 1px 0px #7a7a7a;
+}
+
+#screen {
+    grid-column: 1 / 5;
+    background-color: greenyellow;
+    color: black;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 44px;
+    font-family: 'Courier New', Courier, monospace; 
+    border-radius: 12px;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.5); 
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="sbox" id="screen"> </div>
+        <div class="sbox" onclick="cal('7')"> 7 </div>
+        <div class="sbox" onclick="cal('8')"> 8 </div>
+        <div class="sbox" onclick="cal('9')"> 9 </div>
+        <div class="sbox" onclick="cal('*')"> * </div>
+        <div class="sbox" onclick="cal('4')"> 4 </div>
+        <div class="sbox" onclick="cal('5')"> 5 </div>
+        <div class="sbox" onclick="cal('6')"> 6 </div>
+        <div class="sbox" onclick="cal('/')"> / </div>
+        <div class="sbox" onclick="cal('1')"> 1 </div>
+        <div class="sbox" onclick="cal('2')"> 2 </div>
+        <div class="sbox" onclick="cal('3')"> 3 </div>
+        <div class="sbox" onclick="cal('+')"> + </div>
+        <div class="sbox" onclick="cal('.')"> . </div>
+        <div class="sbox" onclick="cal('0')"> 0 </div>
+        <div class="sbox" onclick="cal('=')"> = </div>
+        <div class="sbox" onclick="cal('-')"> - </div>
+        <div class="sbox" onclick="cal('DEL')"> DEL </div>
+        <div class="sbox" onclick="cal('clear')"> clear </div>
+    </div>
+
+    <script>    
+        let screen = document.getElementById("screen")
+
+        function deleteLast() {
+            screen.innerText = screen.innerText.slice(0, -1);
+            if (screen.innerText === "") {
+                screen.innerText = "0";
+            }
+        }
+        let screenTxt=document.getElementById("screen").innerText
+        function screenUpdate(txt) {
+            screenTxt+=txt
+            console.log(screenTxt);
+            document.getElementById("screen").innerText=screenTxt;
+        }
+        function cal(btn){
+            switch(btn){
+                case '1':
+                    screenUpdate('1')
+                break;
+                case '2':
+                    screenUpdate('2')
+                break;
+                case '3':
+                    screenUpdate('3')
+                break;
+                case '4':
+                    screenUpdate('4')
+                break;
+                case '5':
+                    screenUpdate('5')
+                break;
+                case '6':
+                    screenUpdate('6')
+                break;
+                case '7':
+                    screenUpdate('7')
+                break;
+                case '8':
+                    screenUpdate('8')
+                break;
+                case '9':
+                    screenUpdate('9')
+                break;
+                case '0':
+                    screenUpdate('0')
+                break;
+                case '.':
+                    screenUpdate('.')
+                break;
+                case '+':
+                    screenUpdate('+')
+                break;
+                case '-':
+                    screenUpdate('-')
+                break;
+                case '*':
+                    screenUpdate('*')
+                break;
+                case '/':
+                    screenUpdate('/')
+                break;
+                case 'DEL':
+                    deleteLast()                
+                break;
+                case 'clear':
+                    screen.innerText=0                
+                break;
+                case '=':
+                    //screenUpdate('=')
+                    let temp=document.getElementById("screen").innerText;
+                    temp=eval(temp)
+                    console.log(temp);
+                    document.getElementById("screen").innerText=temp
+                break;
+            }
+        }    
+    </script>
+</body>
+</html>
